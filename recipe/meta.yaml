@@ -29,12 +29,10 @@ test:
     - source/xmltest.cpp
     - source/resources
   commands:
-    # Workaround for lack of CONDA_BUILD_SYSROOT variable in staged recipes
-    - export CONDA_BUILD_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk  # [osx]
     - cd source
     - ${CXX} xmltest.cpp -o xmltest $(pkg-config tinyxml2 --cflags --libs)
     # Fix up the runpath on macOS
-    - ${INSTALL_NAME_TOOL} -change @rpath/libtinyxml2.6.dylib $CONDA_PREFIX/lib/libtinyxml2.6.dylib xmltest  # [osx]
+    - ${INSTALL_NAME_TOOL} -change @rpath/libtinyxml2.{{ version.split('.')[0] }}.dylib $CONDA_PREFIX/lib/libtinyxml2.{{ version.split('.')[0] }}.dylib xmltest  # [osx]
     - ./xmltest
 
 about:
