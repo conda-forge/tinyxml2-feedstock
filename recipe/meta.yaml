@@ -19,8 +19,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
-  run:
-    - vs2015_runtime  # [win]
+    - make  # [unix]
 
 test:
   requires:
