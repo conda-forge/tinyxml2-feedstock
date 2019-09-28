@@ -11,14 +11,16 @@ source:
   folder: source
 
 build:
-  number: 0
-  skip: true  # [win]
+  number: 1
+  skip: true  # [win and vc<14]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
+  run:
+    - vs2015_runtime  # [win]
 
 test:
   requires:
@@ -29,11 +31,14 @@ test:
     - source/xmltest.cpp
     - source/resources
   commands:
-    - cd source
-    - ${CXX} xmltest.cpp -o xmltest $(pkg-config tinyxml2 --cflags --libs)
+    - cd source  # [unix or osx]
+    - ${CXX} xmltest.cpp -o xmltest $(pkg-config tinyxml2 --cflags --libs)  # [unix or osx]
     # Fix up the runpath on macOS
     - ${INSTALL_NAME_TOOL} -change @rpath/libtinyxml2.{{ version.split('.')[0] }}.dylib $CONDA_PREFIX/lib/libtinyxml2.{{ version.split('.')[0] }}.dylib xmltest  # [osx]
-    - ./xmltest
+    - ./xmltest  # [unix or osx]
+
+    - if exist %PREFIX%\\Library\\lib\\cmake\\tinyxml2\\tinyxml2Config.cmake (exit 0) else (exit 1)  # [win]
+    - if exist %PREFIX%\\Library\\lib\\cmake\\tinyxml2\\tinyxml2Targets.cmake (exit 0) else (exit 1)  # [win]
 
 about:
   home: http://leethomason.github.io/tinyxml2/
