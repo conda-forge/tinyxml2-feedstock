@@ -1,5 +1,5 @@
 {% set name = "tinyxml2" %}
-{% set version = "7.1.0" %}
+{% set version = "8.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://github.com/leethomason/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 68ebd396a4220d5a9b5a621c6e9c66349c5cfdf5efaea3f16e3bb92e45f4e2a3
+  sha256: 6ce574fbb46751842d23089485ae73d3db12c1b6639cda7721bf3a7ee862012c
   folder: source
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win and vc<14]
 
 requirements:
@@ -43,7 +43,7 @@ about:
   home: http://leethomason.github.io/tinyxml2/
   license: zlib
   license_file: LICENSE.txt
-  summary: 'TinyXML2 is a simple, small, efficient, C++ XML parser that can be easily integrated into other programs.'
+  summary: TinyXML2 is a simple, small, efficient, C++ XML parser that can be easily integrated into other programs.
 
 extra:
   recipe-maintainers:
