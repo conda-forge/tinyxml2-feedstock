@@ -11,8 +11,10 @@ source:
   folder: source
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win and vc<14]
+  run_exports:
+    - {{ pin_subpackage(name, max_pin='x.x') }}
 
 requirements:
   build:
@@ -41,6 +43,7 @@ test:
 
 about:
   home: http://leethomason.github.io/tinyxml2/
+  dev_url: https://github.com/leethomason/tinyxml2
   license: zlib
   license_file: LICENSE.txt
   summary: TinyXML2 is a simple, small, efficient, C++ XML parser that can be easily integrated into other programs.
@@ -50,3 +53,4 @@ extra:
     - gartung
     - chrisburr
     - henryiii
+    - wolfv
