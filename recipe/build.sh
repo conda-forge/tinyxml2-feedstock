@@ -14,7 +14,7 @@ fi
 mkdir -p build
 cd build
 
-cmake -LAH \
+cmake ${CMAKE_ARGS} -LAH \
     ${CMAKE_PLATFORM_FLAGS[@]+"${CMAKE_PLATFORM_FLAGS[@]}"} \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH="${PREFIX}" \
@@ -31,4 +31,6 @@ make -j${CPU_COUNT}
 
 make install
 
+if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
 ctest --output-on-failure
+fi
