@@ -5,11 +5,11 @@ Home: http://leethomason.github.io/tinyxml2/
 
 Package license: zlib
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/tinyxml2-feedstock/blob/master/LICENSE.txt)
 
 Summary: TinyXML2 is a simple, small, efficient, C++ XML parser that can be easily integrated into other programs.
 
-
+Development: https://github.com/leethomason/tinyxml2
 
 Current build status
 ====================
@@ -68,6 +68,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=6567&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tinyxml2-feedstock?branchName=master&jobName=osx&configuration=osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=6567&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tinyxml2-feedstock?branchName=master&jobName=osx&configuration=osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
