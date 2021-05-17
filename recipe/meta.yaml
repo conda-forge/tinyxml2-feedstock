@@ -1,5 +1,5 @@
 {% set name = "tinyxml2" %}
-{% set version = "8.0.0" %}
+{% set version = "8.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://github.com/leethomason/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 6ce574fbb46751842d23089485ae73d3db12c1b6639cda7721bf3a7ee862012c
+  sha256: 23c95af3b981cf9a56c7f669505832c93427cb684811bcb6c9311bd18fa9bc30
   folder: source
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win and vc<14]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
