@@ -44,7 +44,7 @@ test:
 about:
   home: http://leethomason.github.io/tinyxml2/
   dev_url: https://github.com/leethomason/tinyxml2
-  license: zlib
+  license: Zlib
   license_file: LICENSE.txt
   summary: TinyXML2 is a simple, small, efficient, C++ XML parser that can be easily integrated into other programs.
 
