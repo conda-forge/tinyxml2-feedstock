@@ -1,5 +1,5 @@
 {% set name = "tinyxml2" %}
-{% set version = "8.0.0" %}
+{% set version = "8.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://github.com/leethomason/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 6ce574fbb46751842d23089485ae73d3db12c1b6639cda7721bf3a7ee862012c
+  sha256: 23c95af3b981cf9a56c7f669505832c93427cb684811bcb6c9311bd18fa9bc30
   folder: source
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win and vc<14]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
@@ -25,8 +25,8 @@ requirements:
 
 test:
   requires:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}  # [unix]
+    - {{ compiler('cxx') }}  # [unix]
     - pkg-config
   source_files:
     - source/xmltest.cpp
@@ -38,13 +38,14 @@ test:
     - ${INSTALL_NAME_TOOL} -change @rpath/libtinyxml2.{{ version.split('.')[0] }}.dylib $CONDA_PREFIX/lib/libtinyxml2.{{ version.split('.')[0] }}.dylib xmltest  # [osx]
     - ./xmltest  # [unix or osx]
 
-    - if exist %PREFIX%\\Library\\lib\\cmake\\tinyxml2\\tinyxml2Config.cmake (exit 0) else (exit 1)  # [win]
-    - if exist %PREFIX%\\Library\\lib\\cmake\\tinyxml2\\tinyxml2Targets.cmake (exit 0) else (exit 1)  # [win]
+    - if exist %PREFIX%\\Library\\bin\\tinyxml2.dll (exit 0) else (exit 1)  # [win]
+    - if exist %PREFIX%\\Library\\lib\\cmake\\tinyxml2\\tinyxml2-config.cmake (exit 0) else (exit 1)  # [win]
+    - if exist %PREFIX%\\Library\\lib\\cmake\\tinyxml2\\tinyxml2-shared-targets.cmake (exit 0) else (exit 1)  # [win]
 
 about:
   home: http://leethomason.github.io/tinyxml2/
   dev_url: https://github.com/leethomason/tinyxml2
-  license: zlib
+  license: Zlib
   license_file: LICENSE.txt
   summary: TinyXML2 is a simple, small, efficient, C++ XML parser that can be easily integrated into other programs.
 
