@@ -3,7 +3,7 @@ About tinyxml2
 
 Home: http://leethomason.github.io/tinyxml2/
 
-Package license: zlib
+Package license: Zlib
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/tinyxml2-feedstock/blob/master/LICENSE.txt)
 
