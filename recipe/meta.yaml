@@ -11,8 +11,7 @@ source:
   folder: source
 
 build:
-  number: 1
-  skip: true  # [win and vc<14]
+  number: 2
   run_exports:
     - {{ pin_subpackage(name, max_pin='x') }}
 
@@ -37,6 +36,7 @@ test:
     # Fix up the runpath on macOS
     - ${INSTALL_NAME_TOOL} -change @rpath/libtinyxml2.{{ version.split('.')[0] }}.dylib $CONDA_PREFIX/lib/libtinyxml2.{{ version.split('.')[0] }}.dylib xmltest  # [osx]
     - ./xmltest  # [unix or osx]
+    - test -f ${PREFIX}/lib/tinyxml2${SHLIB_EXT}  # [unix]
 
     - if exist %PREFIX%\\Library\\bin\\tinyxml2.dll (exit 0) else (exit 1)  # [win]
     - if exist %PREFIX%\\Library\\lib\\cmake\\tinyxml2\\tinyxml2-config.cmake (exit 0) else (exit 1)  # [win]
