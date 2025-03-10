@@ -12,7 +12,7 @@ source:
   target_directory: source
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -22,7 +22,7 @@ requirements:
     - cmake
     - ninja
   run_exports:
-    - ${{ pin_subpackage(name, upper_bound='x') }}
+    - ${{ pin_subpackage(name, upper_bound='x.x') }}
 
 tests:
   - if: unix
