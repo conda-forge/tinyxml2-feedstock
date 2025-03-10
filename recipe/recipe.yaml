@@ -40,7 +40,7 @@ tests:
       files:
         source:
         - source/xmltest.cpp
-        - source/resources
+        - source/resources/
 
       requirements:
         run:
