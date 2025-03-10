@@ -7,6 +7,7 @@ mkdir -p build
 cd build
 
 cmake ${CMAKE_ARGS} -LAH \
+    -GNinja \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH="${PREFIX}" \
     -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -19,9 +20,9 @@ cmake ${CMAKE_ARGS} -LAH \
     ../source
 
 
-make -j${CPU_COUNT}
+ninja -j${CPU_COUNT}
 
-make install
+ninja install
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-1}" != "1" ]]; then
     ctest --output-on-failure
