@@ -1,0 +1,69 @@
+context:
+  name: tinyxml2
+  version: '10.1.0'
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/leethomason/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 9da7e1aebbf180ef6f39044b9740a4e96fa69e54a01318488512ae92ca97a685
+  target_directory: source
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - ninja
+  run_exports:
+    - ${{ pin_subpackage(name, upper_bound='x') }}
+
+tests:
+  - if: unix
+    then:
+      script:
+        - cd source
+        - ${CXX} xmltest.cpp -o xmltest $(pkg-config tinyxml2 --cflags --libs)
+        # Fix up the runpath on macOS
+        - if: osx
+          then:
+          - install_name_tool -change @rpath/libtinyxml2.10.dylib $CONDA_PREFIX/lib/libtinyxml2.10.dylib xmltest
+        - ./xmltest
+        - test -f ${PREFIX}/lib/libtinyxml2${SHLIB_EXT}
+
+      files:
+        source:
+        - source/xmltest.cpp
+        - source/resources
+
+      requirements:
+        run:
+          - ${{ compiler('c') }}
+          - ${{ compiler('cxx') }}
+          - pkg-config
+  - package_contents:
+      lib:
+        - tinyxml2
+      files:
+        - "**/cmake/tinyxml2/tinyxml2-config.cmake"
+        - "**/cmake/tinyxml2/tinyxml2-shared-targets.cmake"
+
+about:
+  homepage: http://leethomason.github.io/tinyxml2/
+  repository: https://github.com/leethomason/tinyxml2
+  license: Zlib
+  license_file: LICENSE.txt
+  summary: TinyXML2 is a simple, small, efficient, C++ XML parser that can be easily integrated into other programs.
+
+extra:
+  recipe-maintainers:
+    - gartung
+    - chrisburr
+    - henryiii
+    - wolfv
