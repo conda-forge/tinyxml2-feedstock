@@ -33,7 +33,7 @@ tests:
         # Fix up the runpath on macOS
         - if: osx
           then:
-            - install_name_tool -change @rpath/libtinyxml2.10.dylib $CONDA_PREFIX/lib/libtinyxml2.10.dylib xmltest
+            - install_name_tool -change @rpath/libtinyxml2.11.dylib $CONDA_PREFIX/lib/libtinyxml2.11.dylib xmltest
         - ./xmltest
         - test -f ${PREFIX}/lib/libtinyxml2${SHLIB_EXT}
 
